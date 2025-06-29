@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Painel do Aluno</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  </head>
+  <body class="flex bg-black min-h-screen">
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="w-64 bg-[#2e2e30] text-white flex flex-col py-8 px-4 space-y-6 transition-all duration-300">
+      <button id="toggleSidebar" class="text-3xl flex items-center justify-center mb-8 focus:outline-none">
+        <ion-icon name="menu-outline"></ion-icon>
+      </button>
+      <nav class="space-y-4">
+        <a href="#" class="flex items-center space-x-2 hover:text-yellow-400">
+          <ion-icon name="home-outline"></ion-icon>
+          <span class="menu-text">Página inicial</span>
+        </a>
+        <a href="#" class="flex items-center space-x-2 hover:text-yellow-400">
+          <ion-icon name="book-outline"></ion-icon>
+          <span class="menu-text">Painel de estudos</span>
+        </a>
+        <a href="#" class="flex items-center space-x-2 hover:text-yellow-400">
+          <ion-icon name="notifications-outline"></ion-icon>
+          <span class="menu-text">Caixa de entrada</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main content -->
+    <main class="flex-1 p-8 text-center text-white">
+      <p id="dataAtual" class="text-lg mb-2"></p>
+      <h1 class="text-3xl font-bold mb-8">🐵 Bem vindo(a), {{nome_usuario}}!</h1>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 justify-center items-start">
+        <!-- Módulo I -->
+        <div class="bg-yellow-400 text-black p-6 rounded-3xl shadow-lg flex flex-col items-center">
+          <h2 class="text-xl font-bold underline mb-4">MÓDULO I</h2>
+          <ul class="text-left space-y-1 mb-4">
+            <li>introdução à algoritmos;</li>
+            <li>operadores;</li>
+            <li>condicional;</li>
+            <li>repetição;</li>
+          </ul>
+          <ul class="text-left list-disc pl-5">
+            <li>material teórico</li>
+            <li>exercícios</li>
+          </ul>
+        </div>
+
+        <!-- Módulo II -->
+        <div class="bg-yellow-400 text-black p-6 rounded-3xl shadow-lg flex flex-col items-center">
+          <h2 class="text-xl font-bold underline mb-4">MÓDULO II</h2>
+          <ul class="text-left space-y-1 mb-4">
+            <li>vetores;</li>
+            <li>strings;</li>
+            <li>manipulação de strings;</li>
+            <li>matrizes;</li>
+          </ul>
+          <ul class="text-left list-disc pl-5">
+            <li>material teórico</li>
+            <li>exercícios</li>
+          </ul>
+        </div>
+
+        <!-- Módulo III -->
+        <div class="bg-yellow-400 text-black p-6 rounded-3xl shadow-lg flex flex-col items-center">
+          <h2 class="text-xl font-bold underline mb-4">MÓDULO III</h2>
+          <ul class="text-left space-y-1 mb-4">
+            <li>funções;</li>
+            <li>struct;</li>
+            <li>ponteiros;</li>
+            <li>depuração;</li>
+          </ul>
+          <ul class="text-left list-disc pl-5">
+            <li>material teórico</li>
+            <li>exercícios</li>
+          </ul>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      // Atualiza a data
+      const dataEl = document.getElementById("dataAtual");
+      const hoje = new Date();
+      const options = { weekday: 'long', day: 'numeric', month: 'long' };
+      const dataFormatada = hoje.toLocaleDateString('pt-BR', options);
+      dataEl.textContent = dataFormatada.charAt(0).toUpperCase() + dataFormatada.slice(1);
+
+      // Toggle sidebar
+      document.getElementById('toggleSidebar').addEventListener('click', function() {
+        const sidebar = document.getElementById('sidebar');
+        sidebar.classList.toggle('w-64');
+        sidebar.classList.toggle('w-16');
+
+        // Oculta ou mostra os textos dos links
+        const texts = sidebar.querySelectorAll('.menu-text');
+        texts.forEach(text => {
+          text.classList.toggle('hidden');
+        });
+      });
+    </script>
+  </body>
+</html>
