@@ -20,21 +20,6 @@
         "concluida": false
     },
     {
-        "id": 5,
-        "texto": "Vetores",
-        "concluida": false
-    },
-    {
-        "id": 6,
-        "texto": "Strings",
-        "concluida": false
-    },
-    {
-        "id": 7,
-        "texto": "Manipulação de strings",
-        "concluida": false
-    },
-    {
         "id": 8,
         "texto": "Matrizes",
         "concluida": false
