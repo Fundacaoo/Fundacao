@@ -12,8 +12,15 @@
       nomodule
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
     ></script>
+    <style>
+      .blurred {
+        filter: blur(5px);
+        pointer-events: none;
+        user-select: none;
+      }
+    </style>
   </head>
-  <body class="flex bg-black min-h-screen">
+  <body class="flex bg-black min-h-screen text-white relative">
     <!-- Sidebar -->
     <aside
       id="sidebar"
@@ -49,187 +56,124 @@
           <ion-icon name="notifications-outline"></ion-icon>
           <span class="menu-text">Caixa de entrada</span>
         </a>
+        <!-- Botão para reiniciar o diálogo -->
+        <a
+          href="#"
+          id="btnReiniciarDialogo"
+          class="flex items-center space-x-2 hover:text-yellow-400"
+        >
+          <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+          <span class="menu-text">Iniciar diálogo</span>
+        </a>
       </nav>
     </aside>
 
     <!-- Main content -->
-    <main class="flex-1 p-8 text-center text-white">
-      <!-- Conteúdo da Página Inicial -->
-      <div id="pagina-inicial">
-        <p id="dataAtual" class="text-lg mb-2"></p>
-        <h1 class="text-3xl font-bold mb-8">🐵 Bem vindo(a), {{nome_usuario}}!</h1>
+    <main id="conteudo" class="flex-1 p-8 text-center">
+      <p id="dataAtual" class="text-lg mb-2"></p>
+      <h1 class="text-3xl font-bold mb-8">🐵 Bem vindo(a), {{nome_usuario}}!</h1>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 justify-center items-start">
-          <!-- Módulo I -->
-          <div
-            class="bg-yellow-400 text-black p-6 rounded-3xl shadow-lg flex flex-col items-center"
-          >
-            <h2 class="text-xl font-bold underline mb-4">MÓDULO I</h2>
-            <ul class="text-left space-y-1 mb-4">
-              <li>introdução à algoritmos;</li>
-              <li>operadores;</li>
-              <li>condicional;</li>
-              <li>repetição;</li>
-            </ul>
-            <ul class="text-left list-disc pl-5">
-              <li>material teórico</li>
-              <li>exercícios</li>
-            </ul>
-          </div>
-
-          <!-- Módulo II -->
-          <div
-            class="bg-yellow-400 text-black p-6 rounded-3xl shadow-lg flex flex-col items-center"
-          >
-            <h2 class="text-xl font-bold underline mb-4">MÓDULO II</h2>
-            <ul class="text-left space-y-1 mb-4">
-              <li>vetores;</li>
-              <li>strings;</li>
-              <li>manipulação de strings;</li>
-              <li>matrizes;</li>
-            </ul>
-            <ul class="text-left list-disc pl-5">
-              <li>material teórico</li>
-              <li>exercícios</li>
-            </ul>
-          </div>
-
-          <!-- Módulo III -->
-          <div
-            class="bg-yellow-400 text-black p-6 rounded-3xl shadow-lg flex flex-col items-center"
-          >
-            <h2 class="text-xl font-bold underline mb-4">MÓDULO III</h2>
-            <ul class="text-left space-y-1 mb-4">
-              <li>funções;</li>
-              <li>struct;</li>
-              <li>ponteiros;</li>
-              <li>depuração;</li>
-            </ul>
-            <ul class="text-left list-disc pl-5">
-              <li>material teórico</li>
-              <li>exercícios</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- Painel de Estudos (inicialmente escondido) -->
-      <div
-        id="painel-estudos"
-        class="hidden mt-12 bg-gray-800 p-6 rounded-3xl shadow-lg text-left"
-      >
-        <h2 class="text-2xl font-bold mb-4 text-yellow-400">
-          Painel de Estudos (Tarefas)
-        </h2>
-
-        <div class="flex mb-4">
-          <input
-            id="novaTarefa"
-            type="text"
-            placeholder="Adicionar nova tarefa..."
-            class="flex-1 px-4 py-2 rounded-l-md text-black focus:outline-none"
-          />
-          <button
-            onclick="adicionarTarefa()"
-            class="bg-yellow-400 text-black px-4 py-2 rounded-r-md font-bold hover:bg-yellow-300"
-          >
-            Adicionar
-          </button>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 justify-center items-start">
+        <!-- Módulo I -->
+        <div
+          class="bg-yellow-400 text-black p-6 rounded-3xl shadow-lg flex flex-col items-center"
+        >
+          <h2 class="text-xl font-bold underline mb-4">MÓDULO I</h2>
+          <ul class="text-left space-y-1 mb-4">
+            <li>introdução à algoritmos;</li>
+            <li>operadores;</li>
+            <li>condicional;</li>
+            <li>repetição;</li>
+          </ul>
+          <ul class="text-left list-disc pl-5">
+            <li>material teórico</li>
+            <li>exercícios</li>
+          </ul>
         </div>
 
-        <ul id="listaTarefas" class="space-y-2"></ul>
+        <!-- Módulo II -->
+        <div
+          class="bg-yellow-400 text-black p-6 rounded-3xl shadow-lg flex flex-col items-center"
+        >
+          <h2 class="text-xl font-bold underline mb-4">MÓDULO II</h2>
+          <ul class="text-left space-y-1 mb-4">
+            <li>vetores;</li>
+            <li>strings;</li>
+            <li>manipulação de strings;</li>
+            <li>matrizes;</li>
+          </ul>
+          <ul class="text-left list-disc pl-5">
+            <li>material teórico</li>
+            <li>exercícios</li>
+          </ul>
+        </div>
+
+        <!-- Módulo III -->
+        <div
+          class="bg-yellow-400 text-black p-6 rounded-3xl shadow-lg flex flex-col items-center"
+        >
+          <h2 class="text-xl font-bold underline mb-4">MÓDULO III</h2>
+          <ul class="text-left space-y-1 mb-4">
+            <li>funções;</li>
+            <li>struct;</li>
+            <li>ponteiros;</li>
+            <li>depuração;</li>
+          </ul>
+          <ul class="text-left list-disc pl-5">
+            <li>material teórico</li>
+            <li>exercícios</li>
+          </ul>
+        </div>
       </div>
     </main>
 
+    <!-- Modal 1 -->
+    <div
+      id="dialogo1"
+      class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50"
+    >
+      <div class="bg-white text-black p-8 rounded-3xl flex flex-col items-center max-w-lg">
+        <p class="mb-4 text-center">
+          Precisamos da sua ajuda, mas para isso antes vamos realizar um treinamento para te transformar em um agente especializado em programação de linguagem C!
+        </p>
+        <button
+          id="btnProximo"
+          class="bg-yellow-400 text-black px-6 py-2 rounded-full font-bold hover:bg-yellow-300"
+        >
+          Próximo
+        </button>
+      </div>
+      <img
+        src="/mnt/data/390fed55-e8dc-4a1b-8398-72caf569e9e4.png"
+        alt="Macaco"
+        class="w-48 ml-6"
+      />
+    </div>
+
+    <!-- Modal 2 -->
+    <div
+      id="dialogo2"
+      class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50 hidden"
+    >
+      <div class="bg-white text-black p-8 rounded-3xl flex flex-col items-center max-w-lg">
+        <p class="mb-4 text-center">
+          Com sua dedicação, você será capaz de desvendar todos os desafios e se tornar um verdadeiro mestre na linguagem C!
+        </p>
+        <button
+          id="btnFechar"
+          class="bg-yellow-400 text-black px-6 py-2 rounded-full font-bold hover:bg-yellow-300"
+        >
+          Vamos começar!
+        </button>
+      </div>
+      <img
+        src="/static/img/pcmacacoFundacao.jpeg"
+        alt="Macaco"
+        class="w-48 ml-6"
+      />
+    </div>
+
     <script>
-      const API_URL = "http://localhost:8080/tarefas";
-
-      async function carregarTarefas() {
-        const res = await fetch(API_URL);
-        const tarefas = await res.json();
-        renderizarTarefas(tarefas);
-      }
-
-      async function adicionarTarefa() {
-        const input = document.getElementById("novaTarefa");
-        const texto = input.value.trim();
-        if (!texto) return;
-
-        await fetch(API_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ texto }),
-        });
-
-        input.value = "";
-        carregarTarefas();
-      }
-
-      function renderizarTarefas(tarefas) {
-        const lista = document.getElementById("listaTarefas");
-        lista.innerHTML = "";
-
-        tarefas.forEach((tarefa) => {
-          const li = document.createElement("li");
-          li.className = `flex justify-between items-center p-3 rounded-md ${
-            tarefa.concluida ? "bg-green-500 line-through" : "bg-gray-700"
-          }`;
-
-          const span = document.createElement("span");
-          span.textContent = tarefa.texto;
-
-          const divBtns = document.createElement("div");
-          divBtns.className = "space-x-2";
-
-          // Agora todas as tarefas podem ser editadas e deletadas
-          const btnConcluir = document.createElement("button");
-          btnConcluir.textContent = tarefa.concluida ? "Desfazer" : "Concluir";
-          btnConcluir.className =
-            "bg-green-400 text-black px-2 py-1 rounded hover:bg-green-300";
-          btnConcluir.onclick = async () => {
-            await fetch(
-              `${API_URL}/${tarefa.id}/${tarefa.concluida ? "desfazer" : "concluir"}`,
-              { method: "PATCH" }
-            );
-            carregarTarefas();
-          };
-
-          const btnEditar = document.createElement("button");
-          btnEditar.textContent = "Editar";
-          btnEditar.className =
-            "bg-yellow-400 text-black px-2 py-1 rounded hover:bg-yellow-300";
-          btnEditar.onclick = async () => {
-            const novoTexto = prompt("Editar tarefa:", tarefa.texto);
-            if (novoTexto && novoTexto.trim() !== "") {
-              await fetch(`${API_URL}/${tarefa.id}`, {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ texto: novoTexto }),
-              });
-              carregarTarefas();
-            }
-          };
-
-          const btnDeletar = document.createElement("button");
-          btnDeletar.textContent = "Deletar";
-          btnDeletar.className =
-            "bg-red-500 text-white px-2 py-1 rounded hover:bg-red-400";
-          btnDeletar.onclick = async () => {
-            await fetch(`${API_URL}/${tarefa.id}`, { method: "DELETE" });
-            carregarTarefas();
-          };
-
-          divBtns.appendChild(btnConcluir);
-          divBtns.appendChild(btnEditar);
-          divBtns.appendChild(btnDeletar);
-
-          li.appendChild(span);
-          li.appendChild(divBtns);
-
-          lista.appendChild(li);
-        });
-      }
-
       // Atualiza a data
       const dataEl = document.getElementById("dataAtual");
       const hoje = new Date();
@@ -238,37 +182,52 @@
       dataEl.textContent =
         dataFormatada.charAt(0).toUpperCase() + dataFormatada.slice(1);
 
-      // Toggle sidebar
+      // Sidebar toggle
       document
         .getElementById("toggleSidebar")
         .addEventListener("click", function () {
           const sidebar = document.getElementById("sidebar");
           sidebar.classList.toggle("w-64");
           sidebar.classList.toggle("w-16");
-
           const texts = sidebar.querySelectorAll(".menu-text");
-          texts.forEach((text) => {
-            text.classList.toggle("hidden");
-          });
+          texts.forEach((text) => text.classList.toggle("hidden"));
         });
 
-      // Controle para mostrar/esconder páginas
-      const menuInicial = document.getElementById("menu-pagina-inicial");
-      const menuPainel = document.getElementById("menu-painel-estudos");
-      const paginaInicial = document.getElementById("pagina-inicial");
-      const painelEstudos = document.getElementById("painel-estudos");
+      // Blur
+      const conteudo = document.getElementById("conteudo");
+      const dialogo1 = document.getElementById("dialogo1");
+      const dialogo2 = document.getElementById("dialogo2");
+      conteudo.classList.add("blurred");
 
-      menuPainel.addEventListener("click", (e) => {
-        e.preventDefault();
-        paginaInicial.classList.add("hidden");
-        painelEstudos.classList.remove("hidden");
-        carregarTarefas();
+      // Botão próximo
+      document.getElementById("btnProximo").addEventListener("click", () => {
+        dialogo1.classList.add("hidden");
+        dialogo1.style.display = ""; // Resetar
+
+        dialogo2.classList.remove("hidden");
+        dialogo2.style.display = "flex"; // Garantir
       });
 
-      menuInicial.addEventListener("click", (e) => {
+      // Botão fechar
+      document.getElementById("btnFechar").addEventListener("click", () => {
+        dialogo2.classList.add("hidden");
+        dialogo2.style.display = ""; // Resetar
+        conteudo.classList.remove("blurred");
+      });
+
+      // Botão sidebar para reiniciar o diálogo
+      document.getElementById("btnReiniciarDialogo").addEventListener("click", (e) => {
         e.preventDefault();
-        painelEstudos.classList.add("hidden");
-        paginaInicial.classList.remove("hidden");
+
+        // Resetar dialogo1
+        dialogo1.classList.remove("hidden");
+        dialogo1.style.display = "flex";
+
+        // Resetar dialogo2
+        dialogo2.classList.add("hidden");
+        dialogo2.style.display = ""; 
+
+        conteudo.classList.add("blurred");
       });
     </script>
   </body>
